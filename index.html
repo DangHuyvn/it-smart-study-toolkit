@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b3558">
+<meta name="description" content="A practical, science-informed study toolkit for IT students: spaced revision, Pomodoro focus sessions, and active recall quizzes.">
+<title>IT Smart Study Toolkit</title>
+<style>
+:root{--navy:#0b3558;--ink:#18344d;--muted:#60768a;--bg:#f4f8fb;--card:#fff;--line:#dce8ef;--teal:#087f75;--green:#14a875;--blue:#3d82f6;--purple:#8058db;--shadow:0 12px 34px rgba(21,57,83,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}button,input,select{font:inherit}button{cursor:pointer}.shell{max-width:1120px;margin:auto;padding:0 22px}.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:10px;color:var(--navy);font-weight:850;text-decoration:none;letter-spacing:-.03em}.brand-icon{display:grid;place-items:center;width:38px;height:38px;background:#dff7ee;border-radius:13px;font-size:22px}.links{display:flex;gap:6px;align-items:center}.links a{padding:9px 12px;border-radius:10px;text-decoration:none;color:var(--muted);font-size:14px;font-weight:650}.links a:hover,.links a.active{background:#eaf7f3;color:var(--teal)}.btn{border:0;border-radius:12px;padding:11px 16px;font-weight:750;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn-primary{background:var(--navy);color:#fff;box-shadow:0 6px 14px #0b35581c}.btn-primary:hover{transform:translateY(-1px);background:#124a76}.btn-soft{background:#e9f5f2;color:var(--teal)}.btn-outline{background:white;border:1px solid var(--line);color:var(--navy)}.menu-btn{display:none;background:white;border:1px solid var(--line);border-radius:10px;padding:8px 11px}.hero{padding:42px 0 22px}.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:stretch}.hero-copy,.hero-art{border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}.hero-copy{background:linear-gradient(135deg,#fff 0%,#effbf7 100%);padding:clamp(26px,5vw,54px)}.eyebrow{display:inline-flex;align-items:center;gap:7px;border-radius:99px;padding:6px 11px;background:#dff7ec;color:#08785f;font-size:12px;font-weight:800;letter-spacing:.02em}.hero h1{font-size:clamp(2.4rem,5vw,4.5rem);line-height:1.03;letter-spacing:-.055em;color:var(--navy);margin:20px 0 14px}.hero h1 span{color:var(--teal)}.hero p{color:var(--muted);max-width:560px}.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.hero-art{min-height:330px;background:radial-gradient(circle at 70% 25%,#c8f2e3 0 15%,transparent 16%),linear-gradient(145deg,#dff3ed,#e8f1fc 58%,#d4eee5);display:flex;flex-direction:column;justify-content:space-between;padding:26px;position:relative}.art-orb{position:absolute;width:220px;height:220px;border-radius:50%;background:#b9e8da;right:-50px;top:35px;opacity:.7}.laptop{z-index:1;margin:auto;width:min(100%,320px);background:#153b59;padding:12px;border-radius:15px 15px 8px 8px;box-shadow:0 20px 30px #14375230;transform:rotate(-3deg)}.screen{background:linear-gradient(135deg,#0c304f,#1b5b71);border-radius:7px;min-height:180px;color:#f5fffb;padding:22px;display:flex;flex-direction:column;justify-content:center}.screen small{color:#8ee7c7;letter-spacing:.12em;text-transform:uppercase;font-weight:800}.screen strong{font-size:25px;line-height:1.2;margin-top:12px}.laptop-base{height:13px;background:#9eafbc;width:112%;margin-left:-6%;border-radius:0 0 12px 12px}.floating-note{position:absolute;z-index:2;right:17px;bottom:24px;background:#fff;border:1px solid #ffffffa8;border-radius:14px;padding:13px 16px;box-shadow:var(--shadow);font-weight:800;color:var(--teal);transform:rotate(4deg)}.feature-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0 45px}.feature{background:#fff;border:1px solid var(--line);border-radius:17px;padding:18px;display:flex;gap:13px;align-items:center;box-shadow:0 5px 18px #1c4b6b08}.feature-icon{width:48px;height:48px;flex:0 0 48px;border-radius:15px;display:grid;place-items:center;font-size:23px}.feature h3{margin:0;font-size:15px}.feature p{margin:3px 0 0;color:var(--muted);font-size:13px}.green{background:#e0f8ec;color:#07865d}.blue{background:#e5efff;color:#3477ed}.purple{background:#f0e9ff;color:#8058db}.section{padding:20px 0 48px;scroll-margin-top:86px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:20px}.section-head h2{margin:5px 0 0;font-size:clamp(1.65rem,3vw,2.3rem);letter-spacing:-.04em;color:var(--navy)}.section-head p{margin:5px 0 0;color:var(--muted);max-width:620px}.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--teal);font-weight:850}.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(18px,3vw,28px);box-shadow:var(--shadow)}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field{display:flex;flex-direction:column;gap:7px;margin:13px 0}.field label{font-size:13px;font-weight:800;color:#365269}.field input,.field select{width:100%;border:1px solid #cddde7;background:#fff;border-radius:11px;padding:12px 13px;color:var(--ink);outline:none}.field input:focus,.field select:focus{border-color:var(--teal);box-shadow:0 0 0 3px #087f7517}.muted{color:var(--muted)}.small{font-size:13px}.schedule{display:grid;gap:10px;margin-top:18px}.schedule-item{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:13px;background:#f5faf9;border:1px solid #e1efeb}.dot{width:10px;height:10px;border-radius:50%;background:var(--green);margin-top:7px;flex:0 0 10px}.schedule-item strong{display:block}.schedule-item small{color:var(--muted)}.empty{padding:22px;text-align:center;color:var(--muted);border:1px dashed #c7d9e4;border-radius:13px}.timer-panel{text-align:center}.timer-tabs{display:flex;justify-content:center;gap:7px;flex-wrap:wrap}.timer-tabs button{border:0;border-radius:99px;background:#edf3f7;color:#5a7082;padding:9px 15px;font-size:13px;font-weight:800}.timer-tabs button.active{background:#dff7ec;color:#08785f}.timer-ring{width:min(260px,72vw);aspect-ratio:1;border-radius:50%;margin:23px auto 18px;display:grid;place-items:center;background:conic-gradient(var(--green) var(--progress,100%),#e6eff3 0);position:relative}.timer-ring:before{content:"";position:absolute;inset:11px;border-radius:50%;background:#fff}.timer-content{position:relative;z-index:1}.time{font-size:clamp(2.7rem,8vw,4rem);font-weight:850;letter-spacing:-.06em;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.1}.timer-caption{font-size:13px;color:var(--muted);margin-top:6px}.timer-actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}.task-row{max-width:430px;margin:0 auto;text-align:left}.timer-stats{display:flex;justify-content:center;gap:22px;margin-top:18px;color:var(--muted);font-size:13px}.timer-stats strong{color:var(--navy)}.quiz-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.pill{display:inline-block;background:#f0eaff;color:#7547ce;border-radius:99px;padding:6px 10px;font-size:12px;font-weight:800}.progress{height:7px;background:#e8eef3;border-radius:99px;overflow:hidden;margin:16px 0 24px}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#8058db,#4a91f8);transition:width .25s}.question{font-size:clamp(1.2rem,3vw,1.65rem);line-height:1.35;color:var(--navy);margin:12px 0 20px}.answers{display:grid;gap:10px}.answer{border:1px solid var(--line);background:#fff;border-radius:13px;padding:14px;text-align:left;display:flex;gap:12px;align-items:flex-start;color:var(--ink);font-weight:600}.answer:hover:not(:disabled){border-color:#9b8ce8;background:#faf8ff}.answer .letter{width:27px;height:27px;display:grid;place-items:center;border-radius:8px;background:#f0eaff;color:#7547ce;flex:0 0 27px}.answer.correct{border-color:#73d4ad;background:#edfbf4}.answer.correct .letter{background:#c9f4df;color:#08784f}.answer.wrong{border-color:#f3aaa6;background:#fff4f3}.answer:disabled{cursor:default}.feedback{padding:13px 15px;border-radius:12px;margin-top:14px;font-size:14px}.feedback.good{background:#eaf9f1;color:#08784f}.feedback.bad{background:#fff1ef;color:#a63c35}.quiz-actions{display:flex;justify-content:space-between;gap:10px;margin-top:18px}.result{text-align:center;padding:25px 10px}.result .score{font-size:3rem;font-weight:900;color:var(--teal)}.tracker-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.stat-card{border:1px solid var(--line);border-radius:15px;padding:18px;background:#fff}.stat-card .num{font-size:1.8rem;font-weight:850;color:var(--navy)}.stat-card p{margin:3px 0 0;font-size:13px;color:var(--muted)}.checklist{display:grid;gap:10px}.check{display:flex;gap:10px;align-items:flex-start;background:#f7fafc;border-radius:12px;padding:12px}.check input{accent-color:var(--teal);margin-top:5px;width:17px;height:17px}.check label{font-size:14px}.footer{border-top:1px solid var(--line);background:#fff;padding:28px 0;color:var(--muted);font-size:13px}.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.notice{font-size:12px;color:var(--muted);border-left:3px solid #b8d9d4;padding-left:12px;margin-top:17px}.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#0b3558;color:white;padding:12px 18px;border-radius:12px;box-shadow:var(--shadow);transition:.25s;z-index:50;font-size:14px}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){.shell{padding:0 15px}.nav{min-height:62px}.menu-btn{display:block}.links{display:none;position:absolute;top:61px;left:0;right:0;background:#fff;padding:12px 16px 16px;border-bottom:1px solid var(--line);box-shadow:var(--shadow);flex-direction:column;align-items:stretch}.links.open{display:flex}.links a{padding:12px}.nav>.btn{display:none}.hero{padding-top:22px}.hero-grid{grid-template-columns:1fr}.hero-copy{padding:27px 23px}.hero-art{min-height:270px}.screen{min-height:140px}.feature-row{grid-template-columns:1fr;gap:10px;margin-bottom:30px}.feature{padding:14px}.section{padding-bottom:34px}.section-head{display:block}.two-col{grid-template-columns:1fr}.tracker-grid{grid-template-columns:1fr}.panel{padding:18px}.timer-stats{gap:12px;flex-wrap:wrap}.footer-inner{display:block}.footer-inner>div+div{margin-top:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="shell nav">
+    <a class="brand" href="#home"><span class="brand-icon">🧠</span><span>IT Smart Study Toolkit</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <nav class="links" id="navLinks">
+      <a href="#home" class="active">Home</a><a href="#revision">Revision</a><a href="#pomodoro">Pomodoro</a><a href="#recall">Active Recall</a><a href="#track">Track</a>
+    </nav>
+    <a class="btn btn-primary" href="#revision">Get started →</a>
+  </div>
+</header>
+<main>
+<section class="hero shell" id="home">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">✦ SCIENCE-INFORMED LEARNING</span>
+      <h1>IT Smart<br><span>Study Toolkit</span></h1>
+      <h3 style="margin:0;color:#244d69;font-size:clamp(1.05rem,2vw,1.3rem)">Smarter learning. Less cognitive overload.</h3>
+      <p>A practical toolkit for IT students, bringing together spaced revision, Pomodoro focus sessions, and Active Recall to support more effective and sustainable learning.</p>
+      <div class="hero-actions"><a class="btn btn-primary" href="#revision">Start learning ↗</a><a class="btn btn-outline" href="#about">Explore the methods</a></div>
+      <p class="small" style="margin-top:16px">Made for IT students • Free to use • Mobile-friendly</p>
+    </div>
+    <div class="hero-art" aria-label="Illustration of a study desk">
+      <div class="art-orb"></div><div class="laptop"><div class="screen"><small>Build better habits</small><strong>Plan.<br>Practice.<br>Progress.</strong><span style="color:#8ee7c7;margin-top:12px">{"code": "consistency"}</span></div><div class="laptop-base"></div></div>
+      <div class="floating-note">Less cramming, more learning ✦</div>
+    </div>
+  </div>
+  <div class="feature-row">
+    <a class="feature" href="#revision" style="text-decoration:none;color:inherit"><div class="feature-icon green">▦</div><div><h3>Spaced Revision</h3><p>Review over time, remember longer.</p></div></a>
+    <a class="feature" href="#pomodoro" style="text-decoration:none;color:inherit"><div class="feature-icon blue">◷</div><div><h3>Pomodoro Timer</h3><p>Focus for a while, rest intentionally.</p></div></a>
+    <a class="feature" href="#recall" style="text-decoration:none;color:inherit"><div class="feature-icon purple">✧</div><div><h3>Active Recall</h3><p>Test yourself, build understanding.</p></div></a>
+  </div>
+</section>
+
+<section class="section shell" id="about">
+  <div class="section-head"><div><div class="kicker">THE THREE METHODS</div><h2>Study with a strategy</h2><p>Use each tool on its own, or combine all three into a repeatable learning routine.</p></div></div>
+  <div class="two-col">
+    <article class="panel"><div class="feature-icon green">▦</div><h3>Forgetting Curve → Spaced Revision</h3><p class="muted">The forgetting curve describes how memory can fade over time. Spaced revision is a practical strategy: revisit material across multiple sessions and use retrieval practice to check what you remember.</p></article>
+    <article class="panel"><div class="feature-icon blue">◷</div><h3>Pomodoro → Focus & Breaks</h3><p class="muted">Work on one clearly defined task during a focus block, then take a short break. Adjust the duration to your task, attention, and needs; Pomodoro is a flexible strategy, not a guaranteed burnout treatment.</p></article>
+    <article class="panel"><div class="feature-icon purple">✧</div><h3>Active Recall → Retrieve, Don't Just Reread</h3><p class="muted">Try to answer a question, explain a concept, or write code from memory before checking notes. Review mistakes to identify what needs more practice.</p></article>
+    <article class="panel"><div class="feature-icon" style="background:#e8f3fa;color:#0b6587">↻</div><h3>Put them together</h3><p class="muted">Choose a topic → focus on it → retrieve it from memory → schedule another review → adjust based on what you can recall.</p></article>
+  </div>
+</section>
+
+<section class="section shell" id="revision">
+  <div class="section-head"><div><div class="kicker">TOOL 01</div><h2>Spaced Revision Planner</h2><p>Create a simple review schedule for a topic you are learning. These intervals are suggestions, not a universal optimum.</p></div></div>
+  <div class="two-col">
+    <div class="panel">
+      <h3 style="margin-top:0">Create your revision plan</h3>
+      <form id="revisionForm">
+        <div class="field"><label for="topic">Topic / concept</label><input id="topic" required maxlength="100" placeholder="e.g. Binary Search, SQL Joins"></div>
+        <div class="field"><label for="studyDate">First study date</label><input id="studyDate" type="date" required></div>
+        <div class="field"><label for="intervals">Review intervals</label><select id="intervals"><option value="1,3,7,14">Day 1, 3, 7, 14</option><option value="1,4,8,15">Day 1, 4, 8, 15</option><option value="2,5,10,21">Day 2, 5, 10, 21</option></select></div>
+        <button class="btn btn-primary" type="submit">Create revision plan ↗</button>
+      </form>
+      <p class="notice">Tip: before looking at your notes during each review, first try to recall the key ideas or solve a small problem from memory.</p>
+    </div>
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><h3 style="margin:0">Your schedule</h3><button class="btn btn-outline" id="clearPlans" type="button">Clear</button></div>
+      <div id="schedule" class="schedule"><div class="empty">Your revision plan will appear here.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section shell" id="pomodoro">
+  <div class="section-head"><div><div class="kicker">TOOL 02</div><h2>Pomodoro Focus Timer</h2><p>Pick a task, start the timer, and give one thing your attention at a time.</p></div></div>
+  <div class="panel timer-panel">
+    <div class="timer-tabs" role="group" aria-label="Timer mode"><button class="active" data-mode="focus">Focus</button><button data-mode="short">Short break</button><button data-mode="long">Long break</button></div>
+    <div class="timer-ring" id="timerRing"><div class="timer-content"><div class="time" id="timeDisplay" aria-live="polite">25:00</div><div class="timer-caption" id="timerCaption">Time to focus</div></div></div>
+    <div class="task-row">
+      <div class="field"><label for="focusTask">Current task</label><input id="focusTask" maxlength="120" placeholder="e.g. Solve 3 linked-list exercises" value="Study one IT concept"></div>
+      <div class="two-col">
+        <div class="field"><label for="focusLength">Focus length</label><select id="focusLength"><option value="25">25 minutes</option><option value="40">40 minutes</option><option value="50">50 minutes</option><option value="15">15 minutes</option></select></div>
+        <div class="field"><label for="breakLength">Short break</label><select id="breakLength"><option value="5">5 minutes</option><option value="10">10 minutes</option><option value="15">15 minutes</option></select></div>
+      </div>
+    </div>
+    <div class="timer-actions"><button class="btn btn-primary" id="startPause">▶ Start focus</button><button class="btn btn-outline" id="resetTimer">↻ Reset</button><button class="btn btn-soft" id="skipTimer">Next mode →</button></div>
+    <div class="timer-stats"><span>Completed focus sessions: <strong id="sessionCount">0</strong></span><span>Today's focus time: <strong id="focusMinutes">0 min</strong></span></div>
+    <p class="notice" style="max-width:620px;margin:18px auto 0;text-align:left">Keep this tab open while the timer runs. The timer uses your device clock to stay reasonably accurate if the tab is backgrounded. Browser notification and sound are not required.</p>
+  </div>
+</section>
+
+<section class="section shell" id="recall">
+  <div class="section-head"><div><div class="kicker">TOOL 03</div><h2>Active Recall Quiz</h2><p>Answer from memory first. Then check the explanation and learn from mistakes.</p></div></div>
+  <div class="two-col">
+    <div class="panel" id="quizPanel">
+      <div class="quiz-top"><span class="pill" id="quizCategory">PYTHON FUNDAMENTALS</span><span class="muted small" id="questionCount">Question 1 of 6</span></div>
+      <div class="progress"><span id="quizProgress"></span></div>
+      <h3 class="question" id="questionText">What does a Python for loop do?</h3>
+      <div class="answers" id="answers"></div>
+      <div id="feedback" aria-live="polite"></div>
+      <div class="quiz-actions"><button class="btn btn-outline" id="restartQuiz">↻ Restart</button><button class="btn btn-primary" id="nextQuestion" disabled>Check answer first</button></div>
+    </div>
+    <div class="panel">
+      <h3 style="margin-top:0">How to use Active Recall</h3>
+      <div class="checklist">
+        <div class="check"><span>1.</span><label>Read the question and pause before choosing an answer.</label></div>
+        <div class="check"><span>2.</span><label>Try to explain the idea in your own words, or sketch code from memory.</label></div>
+        <div class="check"><span>3.</span><label>Reveal/check the answer and read why it is correct.</label></div>
+        <div class="check"><span>4.</span><label>Mark difficult concepts for another spaced review.</label></div>
+      </div>
+      <p class="notice">A short quiz is a practice aid, not a validated measure of intelligence or overall programming skill.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section shell" id="track">
+  <div class="section-head"><div><div class="kicker">YOUR LEARNING HABITS</div><h2>Track & reflect</h2><p>A lightweight summary of activity on this device, plus a weekly self-check.</p></div></div>
+  <div class="tracker-grid">
+    <div class="stat-card"><div class="muted small">Focus sessions</div><div class="num" id="trackSessions">0</div><p>Completed with this timer</p></div>
+    <div class="stat-card"><div class="muted small">Focus time</div><div class="num" id="trackMinutes">0 min</div><p>Tracked in this browser</p></div>
+    <div class="stat-card"><div class="muted small">Quiz best score</div><div class="num" id="trackScore">—</div><p>Out of 6 questions</p></div>
+  </div>
+  <div class="panel" style="margin-top:16px">
+    <h3 style="margin-top:0">Weekly reflection checklist</h3>
+    <p class="muted small">Check the statements that fit your week. Your selections stay in this browser only.</p>
+    <div class="checklist" id="reflectionList">
+      <div class="check"><input type="checkbox" id="r1"><label for="r1">I broke large IT tasks into smaller steps.</label></div>
+      <div class="check"><input type="checkbox" id="r2"><label for="r2">I tried to recall concepts before rereading notes.</label></div>
+      <div class="check"><input type="checkbox" id="r3"><label for="r3">I revisited difficult concepts on different days.</label></div>
+      <div class="check"><input type="checkbox" id="r4"><label for="r4">I took breaks and made room for sleep and recovery.</label></div>
+      <div class="check"><input type="checkbox" id="r5"><label for="r5">I adjusted my plan when workload became unrealistic.</label></div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px"><button class="btn btn-primary" id="saveReflection">Save reflection</button><button class="btn btn-outline" id="resetStats">Reset local stats</button></div>
+    <div id="reflectionMessage" class="muted small" style="margin-top:10px" aria-live="polite"></div>
+  </div>
+  <p class="notice">This toolkit is educational, not a medical or psychological assessment. It cannot diagnose or guarantee prevention of burnout. If distress or exhaustion persists, consider reaching out to a qualified professional or campus support service.</p>
+</section>
+</main>
+<footer class="footer"><div class="shell footer-inner"><div><strong style="color:var(--navy)">IT Smart Study Toolkit</strong><br>Learn smarter, not harder.</div><div>Student research project • SSA<br><span>Built as an educational prototype. Review the evidence and references before academic submission.</span></div></div></footer>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const $ = id => document.getElementById(id);
+function toast(msg){const el=$('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2300)}
+// Mobile nav
+$('menuBtn').addEventListener('click',()=>{const open=$('navLinks').classList.toggle('open');$('menuBtn').setAttribute('aria-expanded',String(open))});
+document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>{$('navLinks').classList.remove('open');$('menuBtn').setAttribute('aria-expanded','false')}));
+const todayISO=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+$('studyDate').value=todayISO();
+const dateFormat=d=>new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric'}).format(d);
+let plans=JSON.parse(localStorage.getItem('sst_plans')||'[]');
+function renderPlans(){const wrap=$('schedule');if(!plans.length){wrap.innerHTML='<div class="empty">Your revision plan will appear here.</div>';return}wrap.innerHTML='';plans.forEach((p,idx)=>{const group=document.createElement('div');group.className='schedule-item';group.innerHTML=`<span class="dot"></span><div style="flex:1;min-width:0"><strong>${escapeHTML(p.topic)}</strong><small>First studied: ${dateFormat(new Date(p.start+'T12:00:00'))}</small><div style="margin-top:8px;display:grid;gap:7px">${p.dates.map((d,i)=>`<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" data-plan="${idx}" data-review="${i}" ${p.done[i]?'checked':''} style="accent-color:var(--teal)"> Review ${i+1}: ${dateFormat(new Date(d+'T12:00:00'))}</label>`).join('')}</div></div>`;wrap.appendChild(group)});wrap.querySelectorAll('input[type=checkbox]').forEach(cb=>cb.addEventListener('change',()=>{plans[+cb.dataset.plan].done[+cb.dataset.review]=cb.checked;savePlans()}))}
+function savePlans(){localStorage.setItem('sst_plans',JSON.stringify(plans));renderPlans()}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+$('revisionForm').addEventListener('submit',e=>{e.preventDefault();const topic=$('topic').value.trim(),start=$('studyDate').value;if(!topic||!start)return;const days=$('intervals').value.split(',').map(Number);const dates=days.map(n=>{const d=new Date(start+'T12:00:00');d.setDate(d.getDate()+n);return todayISO.call?`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`:''});plans.unshift({topic,start,dates,done:days.map(()=>false)});plans=plans.slice(0,10);savePlans();toast('Revision plan created!');});
+$('clearPlans').addEventListener('click',()=>{plans=[];savePlans();toast('Revision plans cleared')});renderPlans();
+
+// Pomodoro timer: real countdown based on deadline timestamps.
+const durations=()=>({focus:Number($('focusLength').value)*60,short:Number($('breakLength').value)*60,long:15*60});
+let mode='focus',remaining=durations().focus,deadline=null,intervalId=null,sessions=Number(localStorage.getItem('sst_sessions')||0),minutes=Number(localStorage.getItem('sst_minutes')||0),lastQuiz=localStorage.getItem('sst_quizbest');
+function modeDuration(m){const d=durations();return d[m]}
+function fmt(s){s=Math.max(0,Math.ceil(s));return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`}
+function renderTimer(){const total=modeDuration(mode);$('timeDisplay').textContent=fmt(remaining);$('timerCaption').textContent=mode==='focus'?'Time to focus':mode==='short'?'Take a short break':'Take a longer break';$('timerRing').style.setProperty('--progress',`${Math.max(0,Math.min(100,remaining/total*100))}%`);$('startPause').textContent=intervalId?'Ⅱ Pause':(remaining<total?'▶ Resume':mode==='focus'?'▶ Start focus':'▶ Start break');document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));$('sessionCount').textContent=sessions;$('focusMinutes').textContent=minutes+' min';$('trackSessions').textContent=sessions;$('trackMinutes').textContent=minutes+' min';$('trackScore').textContent=lastQuiz===null?'—':lastQuiz+'/6'}
+function stopTicker(){if(intervalId){clearInterval(intervalId);intervalId=null}}
+function chooseMode(m){stopTicker();mode=m;remaining=modeDuration(m);deadline=null;renderTimer()}
+function finishTimer(){stopTicker();remaining=0;deadline=null;if(mode==='focus'){sessions++;minutes+=Number($('focusLength').value);localStorage.setItem('sst_sessions',sessions);localStorage.setItem('sst_minutes',minutes);toast('Focus session complete — time for a break!')}else toast('Break complete — ready when you are!');renderTimer()}
+function tick(){remaining=Math.max(0,Math.ceil((deadline-Date.now())/1000));if(remaining<=0){finishTimer();return}renderTimer()}
+$('startPause').addEventListener('click',()=>{if(intervalId){stopTicker();deadline=null;renderTimer();return}if(remaining<=0)remaining=modeDuration(mode);deadline=Date.now()+remaining*1000;intervalId=setInterval(tick,250);renderTimer()});
+$('resetTimer').addEventListener('click',()=>{stopTicker();deadline=null;remaining=modeDuration(mode);renderTimer()});
+$('skipTimer').addEventListener('click',()=>chooseMode(mode==='focus'?'short':mode==='short'?'long':'focus'));
+document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>chooseMode(b.dataset.mode)));
+$('focusLength').addEventListener('change',()=>{if(mode==='focus'&&!intervalId){remaining=modeDuration(mode);renderTimer()}});
+$('breakLength').addEventListener('change',()=>{if((mode==='short'||mode==='long')&&!intervalId){remaining=modeDuration(mode);renderTimer()}});
+renderTimer();
+
+// Active recall quiz
+const quiz=[
+{q:'What does a Python for loop do?',opts:['Repeats a block for items in an iterable','Defines a new function','Creates a new list automatically','Handles exceptions'],a:0,why:'A for loop iterates over items from an iterable, such as a list or range.'},
+{q:'What is the purpose of a base case in recursion?',opts:['To make code run faster in every case','To stop recursion when a condition is met','To import a library','To store a loop counter'],a:1,why:'A base case provides a stopping condition so recursive calls can end.'},
+{q:'Which statement about Python lists and tuples is correct?',opts:['Both are always immutable','Tuples can only store numbers','Lists are mutable; tuples are immutable in their item structure','Lists cannot contain strings'],a:2,why:'Lists can be changed after creation. Tuples do not support changing their item structure in place.'},
+{q:'What does a SQL JOIN generally do?',opts:['Deletes duplicate rows in every table','Combines related rows from tables using a join condition','Sorts a table alphabetically by default','Encrypts database columns'],a:1,why:'A JOIN combines rows from two or more tables based on a related column or condition.'},
+{q:'What is the time complexity of binary search on a sorted array?',opts:['O(n²)','O(n)','O(log n)','O(1) for all inputs'],a:2,why:'Binary search halves the remaining search interval each step, giving logarithmic time.'},
+{q:'What is a useful first step when debugging a function?',opts:['Rewrite the entire project immediately','Ignore the error and rerun repeatedly','Reproduce the issue and inspect the input, output, and error message','Delete all tests'],a:2,why:'A reproducible case and careful inspection help narrow down the cause before changing code.'}
+];
+let qi=0,chosen=null,score=0,answered=0;
+function renderQuestion(){const q=quiz[qi];$('quizCategory').textContent=qi<3?'PYTHON FUNDAMENTALS':qi===3?'DATABASES':'ALGORITHMS & DEBUGGING';$('questionCount').textContent=`Question ${qi+1} of ${quiz.length}`;$('quizProgress').style.width=`${qi/quiz.length*100}%`;$('questionText').textContent=q.q;$('answers').innerHTML='';$('feedback').innerHTML='';$('nextQuestion').disabled=true;$('nextQuestion').textContent='Choose an answer';chosen=null;q.opts.forEach((op,i)=>{const b=document.createElement('button');b.className='answer';b.innerHTML=`<span class="letter">${String.fromCharCode(65+i)}</span><span>${escapeHTML(op)}</span>`;b.addEventListener('click',()=>answer(i));$('answers').appendChild(b)});}
+function answer(i){if(chosen!==null)return;chosen=i;const q=quiz[qi],correct=i===q.a;if(correct)score++;answered++;document.querySelectorAll('.answer').forEach((b,j)=>{b.disabled=true;if(j===q.a)b.classList.add('correct');else if(j===i)b.classList.add('wrong')});$('feedback').innerHTML=`<div class="feedback ${correct?'good':'bad'}"><strong>${correct?'Correct!':'Not quite.'}</strong> ${escapeHTML(q.why)}</div>`;$('nextQuestion').disabled=false;$('nextQuestion').textContent=qi===quiz.length-1?'See results':'Next question';$('quizProgress').style.width=`${(qi+1)/quiz.length*100}%`}
+function showResults(){const best=Math.max(Number(localStorage.getItem('sst_quizbest')||0),score);localStorage.setItem('sst_quizbest',best);lastQuiz=best;renderTimer();$('quizPanel').innerHTML=`<div class="result"><div class="feature-icon purple" style="margin:auto">✧</div><h2 style="color:var(--navy)">Quiz complete!</h2><div class="score">${score}/${quiz.length}</div><p class="muted">You answered ${score} out of ${quiz.length} questions correctly.</p><p>${score===quiz.length?'Excellent retrieval practice. Try a harder topic next.': 'Review the explanations, then try again later to strengthen recall.'}</p><button class="btn btn-primary" id="playAgain">↻ Try again</button></div>`;$('playAgain').addEventListener('click',()=>{qi=0;chosen=null;score=0;answered=0;$('quizPanel').innerHTML=quizMarkup;bindQuiz();renderQuestion()})}
+const quizMarkup=`<div class="quiz-top"><span class="pill" id="quizCategory">PYTHON FUNDAMENTALS</span><span class="muted small" id="questionCount">Question 1 of 6</span></div><div class="progress"><span id="quizProgress"></span></div><h3 class="question" id="questionText"></h3><div class="answers" id="answers"></div><div id="feedback" aria-live="polite"></div><div class="quiz-actions"><button class="btn btn-outline" id="restartQuiz">↻ Restart</button><button class="btn btn-primary" id="nextQuestion" disabled>Choose an answer</button></div>`;
+function bindQuiz(){ $('restartQuiz').addEventListener('click',()=>{qi=0;score=0;answered=0;renderQuestion()});$('nextQuestion').addEventListener('click',()=>{if(chosen===null)return;if(qi<quiz.length-1){qi++;renderQuestion()}else showResults()})}
+bindQuiz();renderQuestion();
+
+// Reflection local storage
+for(let i=1;i<=5;i++)$('r'+i).checked=localStorage.getItem('sst_r'+i)==='1';
+$('saveReflection').addEventListener('click',()=>{for(let i=1;i<=5;i++)localStorage.setItem('sst_r'+i,$('r'+i).checked?'1':'0');$('reflectionMessage').textContent='Reflection saved on this device.';toast('Reflection saved')});
+$('resetStats').addEventListener('click',()=>{if(!confirm('Reset focus statistics, quiz best score, and reflection checkboxes on this device? Revision plans will not be deleted.'))return;sessions=0;minutes=0;lastQuiz=null;localStorage.removeItem('sst_sessions');localStorage.removeItem('sst_minutes');localStorage.removeItem('sst_quizbest');for(let i=1;i<=5;i++){localStorage.removeItem('sst_r'+i);$('r'+i).checked=false}renderTimer();$('reflectionMessage').textContent='Local stats reset.';toast('Local stats reset')});
+// Highlight active nav section
+const sections=[...document.querySelectorAll('main section[id]')];if('IntersectionObserver' in window){const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('#navLinks a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-25% 0px -65% 0px'});sections.forEach(s=>io.observe(s))}
+</script>
+</body>
+</html>
