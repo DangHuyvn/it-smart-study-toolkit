@@ -106,6 +106,43 @@
       <div id="feedback" aria-live="polite"></div>
       <div class="quiz-actions"><button class="btn btn-outline" id="restartQuiz">↻ Restart</button><button class="btn btn-primary" id="nextQuestion" disabled>Check answer first</button></div>
     </div>
+    
+<div class="panel" id="customQuizPanel">
+  <h3 style="margin-top:0">My Questions</h3>
+  <p class="muted small">Add your own questions and save them on this device.</p>
+
+  <label for="customQuestion">Question</label>
+  <input id="customQuestion" type="text" placeholder="Enter your question">
+
+  <label for="customOpt0">Answer A</label>
+  <input id="customOpt0" type="text" placeholder="Answer A">
+
+  <label for="customOpt1">Answer B</label>
+  <input id="customOpt1" type="text" placeholder="Answer B">
+
+  <label for="customOpt2">Answer C</label>
+  <input id="customOpt2" type="text" placeholder="Answer C">
+
+  <label for="customOpt3">Answer D</label>
+  <input id="customOpt3" type="text" placeholder="Answer D">
+
+  <label for="customCorrect">Correct answer</label>
+  <select id="customCorrect">
+    <option value="0">A</option>
+    <option value="1">B</option>
+    <option value="2">C</option>
+    <option value="3">D</option>
+  </select>
+
+  <label for="customWhy">Explanation (optional)</label>
+  <input id="customWhy" type="text" placeholder="Why is this answer correct?">
+
+  <button class="btn btn-primary" id="addCustomQuestion" type="button">Add question</button>
+  <button class="btn btn-outline" id="showCustomQuestions" type="button">View my questions</button>
+  <button class="btn btn-primary" id="startCustomQuiz" type="button">Start my quiz</button>
+  <div id="customQuestionMessage" aria-live="polite"></div>
+  <div id="customQuestionList"></div>
+</div>
     <div class="panel">
       <h3 style="margin-top:0">How to use Active Recall</h3>
       <div class="checklist">
@@ -188,12 +225,218 @@ const quiz=[
 {q:'What is a useful first step when debugging a function?',opts:['Rewrite the entire project immediately','Ignore the error and rerun repeatedly','Reproduce the issue and inspect the input, output, and error message','Delete all tests'],a:2,why:'A reproducible case and careful inspection help narrow down the cause before changing code.'}
 ];
 let qi=0,chosen=null,score=0,answered=0;
-function renderQuestion(){const q=quiz[qi];$('quizCategory').textContent=qi<3?'PYTHON FUNDAMENTALS':qi===3?'DATABASES':'ALGORITHMS & DEBUGGING';$('questionCount').textContent=`Question ${qi+1} of ${quiz.length}`;$('quizProgress').style.width=`${qi/quiz.length*100}%`;$('questionText').textContent=q.q;$('answers').innerHTML='';$('feedback').innerHTML='';$('nextQuestion').disabled=true;$('nextQuestion').textContent='Choose an answer';chosen=null;q.opts.forEach((op,i)=>{const b=document.createElement('button');b.className='answer';b.innerHTML=`<span class="letter">${String.fromCharCode(65+i)}</span><span>${escapeHTML(op)}</span>`;b.addEventListener('click',()=>answer(i));$('answers').appendChild(b)});}
+
+function renderQuestion() {
+  const q = quiz[qi];
+
+  $('quizCategory').textContent =
+    q.category || 'ACTIVE RECALL QUIZ';
+  $('questionCount').textContent =
+    `Question ${qi + 1} of ${quiz.length}`;
+  $('quizProgress').style.width =
+    `${qi / quiz.length * 100}%`;
+
+  $('questionText').textContent = q.q;
+  $('answers').innerHTML = '';
+  $('feedback').innerHTML = '';
+  $('nextQuestion').disabled = true;
+  $('nextQuestion').textContent = 'Choose an answer';
+  chosen = null;
+
+  q.opts.forEach((op, i) => {
+    const b = document.createElement('button');
+    b.className = 'answer';
+
+    const letter = document.createElement('span');
+    letter.className = 'letter';
+    letter.textContent = String.fromCharCode(65 + i);
+
+    const text = document.createElement('span');
+    text.textContent = op;
+
+    b.appendChild(letter);
+    b.appendChild(text);
+    b.addEventListener('click', () => answer(i));
+    $('answers').appendChild(b);
+  });
+}
+
 function answer(i){if(chosen!==null)return;chosen=i;const q=quiz[qi],correct=i===q.a;if(correct)score++;answered++;document.querySelectorAll('.answer').forEach((b,j)=>{b.disabled=true;if(j===q.a)b.classList.add('correct');else if(j===i)b.classList.add('wrong')});$('feedback').innerHTML=`<div class="feedback ${correct?'good':'bad'}"><strong>${correct?'Correct!':'Not quite.'}</strong> ${escapeHTML(q.why)}</div>`;$('nextQuestion').disabled=false;$('nextQuestion').textContent=qi===quiz.length-1?'See results':'Next question';$('quizProgress').style.width=`${(qi+1)/quiz.length*100}%`}
-function showResults(){const best=Math.max(Number(localStorage.getItem('sst_quizbest')||0),score);localStorage.setItem('sst_quizbest',best);lastQuiz=best;renderTimer();$('quizPanel').innerHTML=`<div class="result"><div class="feature-icon purple" style="margin:auto">✧</div><h2 style="color:var(--navy)">Quiz complete!</h2><div class="score">${score}/${quiz.length}</div><p class="muted">You answered ${score} out of ${quiz.length} questions correctly.</p><p>${score===quiz.length?'Excellent retrieval practice. Try a harder topic next.': 'Review the explanations, then try again later to strengthen recall.'}</p><button class="btn btn-primary" id="playAgain">↻ Try again</button></div>`;$('playAgain').addEventListener('click',()=>{qi=0;chosen=null;score=0;answered=0;$('quizPanel').innerHTML=quizMarkup;bindQuiz();renderQuestion()})}
+function showResults(){const best=Math.max(Number(localStorage.getItem('sst_quizbest')||0),score);localStorage.setItem('sst_quizbest',best);lastQuiz=best;renderTimer();$('quizPanel').innerHTML=`<div class="result"><div class="feature-icon purple" style="margin:auto">✧</div><h2 style="color:var(--navy)">Quiz complete!</h2><div class="score">${score}/${quiz.length}</div><p class="muted">You answered ${score} out of ${quiz.length} questions correctly.</p><p>${score===quiz.length?'Excellent retrieval practice. Try a harder topic next.': 'Review the explanations, then try again later to strengthen recall.'}</p><button class="btn btn-primary" id="playAgain">↻ Try again</button></div>`;$('playAgain').addEventListener('click',()=>{
+  qi=0;
+  chosen=null;
+  score=0;
+  answered=0;
+  quiz.splice(0,quiz.length,...defaultQuiz);
+  $('quizPanel').innerHTML=quizMarkup;
+  bindQuiz();
+  renderQuestion();
+});
 const quizMarkup=`<div class="quiz-top"><span class="pill" id="quizCategory">PYTHON FUNDAMENTALS</span><span class="muted small" id="questionCount">Question 1 of 6</span></div><div class="progress"><span id="quizProgress"></span></div><h3 class="question" id="questionText"></h3><div class="answers" id="answers"></div><div id="feedback" aria-live="polite"></div><div class="quiz-actions"><button class="btn btn-outline" id="restartQuiz">↻ Restart</button><button class="btn btn-primary" id="nextQuestion" disabled>Choose an answer</button></div>`;
-function bindQuiz(){ $('restartQuiz').addEventListener('click',()=>{qi=0;score=0;answered=0;renderQuestion()});$('nextQuestion').addEventListener('click',()=>{if(chosen===null)return;if(qi<quiz.length-1){qi++;renderQuestion()}else showResults()})}
-bindQuiz();renderQuestion();
+function bindQuiz(){ $('restartQuiz').addEventListener('click',()=>{
+  qi=0;
+  score=0;
+  answered=0;
+  chosen=null;
+  renderQuestion();
+});
+
+
+const defaultQuiz = quiz.slice();
+
+function startCustomQuiz() {
+  const customQuestions = loadCustomQuestions();
+
+  if (!customQuestions.length) {
+    alert('Add at least one custom question first!');
+    return;
+  }
+
+  quiz.splice(
+    0,
+    quiz.length,
+    ...customQuestions.map(q => ({
+      ...q,
+      category: 'MY CUSTOM QUESTIONS'
+    }))
+  );
+
+  qi = 0;
+  score = 0;
+  answered = 0;
+  chosen = null;
+
+  $('quizPanel').innerHTML = quizMarkup;
+  bindQuiz();
+  renderQuestion();
+}
+
+$('startCustomQuiz').addEventListener('click', startCustomQuiz);
+
+bindQuiz();
+renderQuestion();
+
+
+
+/* Custom quiz questions */
+const CUSTOM_QUIZ_KEY = 'sst_custom_questions';
+
+function loadCustomQuestions() {
+  try {
+    return JSON.parse(localStorage.getItem(CUSTOM_QUIZ_KEY) || '[]');
+  } catch {
+    return [];
+  }
+}
+
+function saveCustomQuestions(items) {
+  localStorage.setItem(CUSTOM_QUIZ_KEY, JSON.stringify(items));
+}
+
+function renderCustomQuestions() {
+  const list = $('customQuestionList');
+  if (!list) return;
+
+  const items = loadCustomQuestions();
+  list.innerHTML = '';
+
+  if (!items.length) {
+    list.textContent = 'No custom questions yet.';
+    return;
+  }
+
+  items.forEach((item, index) => {
+    const card = document.createElement('div');
+    card.style.cssText = 'padding:12px 0;border-bottom:1px solid #ddd';
+
+    const title = document.createElement('strong');
+    title.textContent = `${index + 1}. ${item.q}`;
+    card.appendChild(title);
+
+    const detail = document.createElement('p');
+    detail.textContent =
+      `A. ${item.opts[0]} | B. ${item.opts[1]} | C. ${item.opts[2]} | D. ${item.opts[3]}`;
+    card.appendChild(detail);
+
+    const correct = document.createElement('p');
+    correct.textContent = `Correct answer: ${'ABCD'[item.a]}`;
+    card.appendChild(correct);
+
+    const edit = document.createElement('button');
+    edit.type = 'button';
+    edit.className = 'btn btn-outline';
+    edit.textContent = 'Edit';
+    edit.addEventListener('click', () => {
+      $('customQuestion').value = item.q;
+      item.opts.forEach((option, i) => {
+        $('customOpt' + i).value = option;
+      });
+      $('customCorrect').value = String(item.a);
+      $('customWhy').value = item.why || '';
+      editingCustomQuestion = index;
+      $('addCustomQuestion').textContent = 'Save changes';
+      $('customQuestionMessage').textContent = 'Editing question ' + (index + 1);
+    });
+    card.appendChild(edit);
+
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.className = 'btn btn-outline';
+    remove.textContent = 'Delete';
+    remove.style.marginLeft = '8px';
+    remove.addEventListener('click', () => {
+      if (!confirm('Delete this question?')) return;
+      const updated = loadCustomQuestions();
+      updated.splice(index, 1);
+      saveCustomQuestions(updated);
+      renderCustomQuestions();
+    });
+    card.appendChild(remove);
+    list.appendChild(card);
+  });
+}
+
+let editingCustomQuestion = -1;
+
+$('addCustomQuestion').addEventListener('click', () => {
+  const question = $('customQuestion').value.trim();
+  const opts = [0, 1, 2, 3].map(i =>
+    $('customOpt' + i).value.trim()
+  );
+  const a = Number($('customCorrect').value);
+  const why = $('customWhy').value.trim();
+
+  if (!question || opts.some(option => !option)) {
+    $('customQuestionMessage').textContent =
+      'Please enter the question and all four answers.';
+    return;
+  }
+
+  const items = loadCustomQuestions();
+  const newItem = { q: question, opts, a, why };
+
+  if (editingCustomQuestion >= 0) {
+    items[editingCustomQuestion] = newItem;
+  } else {
+    items.push(newItem);
+  }
+
+  saveCustomQuestions(items);
+  editingCustomQuestion = -1;
+
+  $('customQuestion').value = '';
+  [0, 1, 2, 3].forEach(i => {
+    $('customOpt' + i).value = '';
+  });
+  $('customCorrect').value = '0';
+  $('customWhy').value = '';
+  $('addCustomQuestion').textContent = 'Add question';
+  $('customQuestionMessage').textContent = 'Question saved on this device!';
+  renderCustomQuestions();
+});
+
+$('showCustomQuestions').addEventListener('click', renderCustomQuestions);
+renderCustomQuestions();
 
 // Reflection local storage
 for(let i=1;i<=5;i++)$('r'+i).checked=localStorage.getItem('sst_r'+i)==='1';
