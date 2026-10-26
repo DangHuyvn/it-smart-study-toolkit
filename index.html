@@ -329,27 +329,47 @@ function renderQuestion() {
 }
 
 function answer(i){if(chosen!==null)return;chosen=i;const q=quiz[qi],correct=i===q.a;if(correct)score++;answered++;document.querySelectorAll('.answer').forEach((b,j)=>{b.disabled=true;if(j===q.a)b.classList.add('correct');else if(j===i)b.classList.add('wrong')});$('feedback').innerHTML=`<div class="feedback ${correct?'good':'bad'}"><strong>${correct?'Correct!':'Not quite.'}</strong> ${escapeHTML(q.why)}</div>`;$('nextQuestion').disabled=false;$('nextQuestion').textContent=qi===quiz.length-1?'See results':'Next question';$('quizProgress').style.width=`${(qi+1)/quiz.length*100}%`}
-function showResults(){const best=Math.max(Number(localStorage.getItem('sst_quizbest')||0),score);localStorage.setItem('sst_quizbest',best);lastQuiz=best;renderTimer();$('quizPanel').innerHTML=`<div class="result"><div class="feature-icon purple" style="margin:auto">✧</div><h2 style="color:var(--navy)">Quiz complete!</h2><div class="score">${score}/${quiz.length}</div><p class="muted">You answered ${score} out of ${quiz.length} questions correctly.</p><p>${score===quiz.length?'Excellent retrieval practice. Try a harder topic next.': 'Review the explanations, then try again later to strengthen recall.'}</p><button class="btn btn-primary" id="playAgain">↻ Try again</button></div>`;$('playAgain').addEventListener('click',()=>{
-  qi=0;
-  chosen=null;
-  score=0;
-  answered=0;
-  quiz.splice(0,quiz.length,...defaultQuiz);
-  $('quizPanel').innerHTML=quizMarkup;
-  bindQuiz();
-  renderQuestion();
-});
-const quizMarkup=`<div class="quiz-top"><span class="pill" id="quizCategory">PYTHON FUNDAMENTALS</span><span class="muted small" id="questionCount">Question 1 of 6</span></div><div class="progress"><span id="quizProgress"></span></div><h3 class="question" id="questionText"></h3><div class="answers" id="answers"></div><div id="feedback" aria-live="polite"></div><div class="quiz-actions"><button class="btn btn-outline" id="restartQuiz">↻ Restart</button><button class="btn btn-primary" id="nextQuestion" disabled>Choose an answer</button></div>`;
-function bindQuiz(){ $('restartQuiz').addEventListener('click',()=>{
-  qi=0;
-  score=0;
-  answered=0;
-  chosen=null;
-  renderQuestion();
-});
-
-
+let isCustomQuiz = false;
 const defaultQuiz = quiz.slice();
+
+const quizMarkup = `<div class="quiz-top"><span class="pill" id="quizCategory">PYTHON FUNDAMENTALS</span><span class="muted small" id="questionCount">Question 1 of 6</span></div><div class="progress"><span id="quizProgress"></span></div><h3 class="question" id="questionText"></h3><div class="answers" id="answers"></div><div id="feedback" aria-live="polite"></div><div class="quiz-actions"><button class="btn btn-outline" id="restartQuiz">↻ Restart</button><button class="btn btn-primary" id="nextQuestion" disabled>Choose an answer</button></div>`;
+
+function showResults() {
+  if (!isCustomQuiz) {
+    const best = Math.max(Number(localStorage.getItem('sst_quizbest') || 0), score);
+    localStorage.setItem('sst_quizbest', best);
+    lastQuiz = best;
+    renderTimer();
+  }
+
+  $('quizPanel').innerHTML = `<div class="result"><div class="feature-icon purple" style="margin:auto">✧</div><h2 style="color:var(--navy)">Quiz complete!</h2><div class="score">${score}/${quiz.length}</div><p class="muted">You answered ${score} out of ${quiz.length} questions correctly.</p><p>${score === quiz.length ? 'Excellent retrieval practice. Try a harder topic next.' : 'Review the explanations, then try again later to strengthen recall.'}</p><button class="btn btn-primary" id="playAgain">↻ Try again</button></div>`;
+
+  $('playAgain').addEventListener('click', () => {
+    isCustomQuiz = false;
+    qi = 0; chosen = null; score = 0; answered = 0;
+    quiz.splice(0, quiz.length, ...defaultQuiz);
+    $('quizPanel').innerHTML = quizMarkup;
+    bindQuiz();
+    renderQuestion();
+  });
+}
+
+function bindQuiz() {
+  $('restartQuiz').addEventListener('click', () => {
+    qi = 0; score = 0; answered = 0; chosen = null;
+    renderQuestion();
+  });
+
+  $('nextQuestion').addEventListener('click', () => {
+    if (chosen === null) return;
+    if (qi === quiz.length - 1) {
+      showResults();
+    } else {
+      qi++;
+      renderQuestion();
+    }
+  });
+}
 
 function startCustomQuiz() {
   const customQuestions = loadCustomQuestions();
@@ -359,20 +379,10 @@ function startCustomQuiz() {
     return;
   }
 
-  quiz.splice(
-    0,
-    quiz.length,
-    ...customQuestions.map(q => ({
-      ...q,
-      category: 'MY CUSTOM QUESTIONS'
-    }))
-  );
+  isCustomQuiz = true;
+  quiz.splice(0, quiz.length, ...customQuestions.map(q => ({ ...q, category: 'MY CUSTOM QUESTIONS' })));
 
-  qi = 0;
-  score = 0;
-  answered = 0;
-  chosen = null;
-
+  qi = 0; score = 0; answered = 0; chosen = null;
   $('quizPanel').innerHTML = quizMarkup;
   bindQuiz();
   renderQuestion();
@@ -383,10 +393,9 @@ $('startCustomQuiz').addEventListener('click', startCustomQuiz);
 bindQuiz();
 renderQuestion();
 
-
-
 /* Custom quiz questions */
 const CUSTOM_QUIZ_KEY = 'sst_custom_questions';
+let editingCustomQuestion = -1;
 
 function loadCustomQuestions() {
   try {
@@ -421,8 +430,7 @@ function renderCustomQuestions() {
     card.appendChild(title);
 
     const detail = document.createElement('p');
-    detail.textContent =
-      `A. ${item.opts[0]} | B. ${item.opts[1]} | C. ${item.opts[2]} | D. ${item.opts[3]}`;
+    detail.textContent = `A. ${item.opts[0]} | B. ${item.opts[1]} | C. ${item.opts[2]} | D. ${item.opts[3]}`;
     card.appendChild(detail);
 
     const correct = document.createElement('p');
@@ -435,9 +443,7 @@ function renderCustomQuestions() {
     edit.textContent = 'Edit';
     edit.addEventListener('click', () => {
       $('customQuestion').value = item.q;
-      item.opts.forEach((option, i) => {
-        $('customOpt' + i).value = option;
-      });
+      item.opts.forEach((option, i) => { $('customOpt' + i).value = option; });
       $('customCorrect').value = String(item.a);
       $('customWhy').value = item.why || '';
       editingCustomQuestion = index;
@@ -456,26 +462,24 @@ function renderCustomQuestions() {
       const updated = loadCustomQuestions();
       updated.splice(index, 1);
       saveCustomQuestions(updated);
+      editingCustomQuestion = -1;
+      $('addCustomQuestion').textContent = 'Add question';
       renderCustomQuestions();
     });
     card.appendChild(remove);
+
     list.appendChild(card);
   });
 }
 
-let editingCustomQuestion = -1;
-
 $('addCustomQuestion').addEventListener('click', () => {
   const question = $('customQuestion').value.trim();
-  const opts = [0, 1, 2, 3].map(i =>
-    $('customOpt' + i).value.trim()
-  );
+  const opts = [0, 1, 2, 3].map(i => $('customOpt' + i).value.trim());
   const a = Number($('customCorrect').value);
   const why = $('customWhy').value.trim();
 
   if (!question || opts.some(option => !option)) {
-    $('customQuestionMessage').textContent =
-      'Please enter the question and all four answers.';
+    $('customQuestionMessage').textContent = 'Please enter the question and all four answers.';
     return;
   }
 
@@ -492,9 +496,7 @@ $('addCustomQuestion').addEventListener('click', () => {
   editingCustomQuestion = -1;
 
   $('customQuestion').value = '';
-  [0, 1, 2, 3].forEach(i => {
-    $('customOpt' + i).value = '';
-  });
+  [0, 1, 2, 3].forEach(i => { $('customOpt' + i).value = ''; });
   $('customCorrect').value = '0';
   $('customWhy').value = '';
   $('addCustomQuestion').textContent = 'Add question';
